@@ -5,7 +5,6 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Parquetry.proto"
 EXTERNPROTO "../protos/RoadLine.proto"
-EXTERNPROTO "../protos/SolidRoundedBox.proto"
 EXTERNPROTO "../protos/SolidPipe1.proto"
 EXTERNPROTO "../protos/SolidPipe2.proto"
 EXTERNPROTO "../protos/SolidPipe3.proto"
@@ -18,8 +17,9 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/traffic/protos/TrafficCone.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/traffic/protos/HighwayPole.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/traffic/protos/HighwaySign.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/RoadPillars.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/solids/protos/SolidBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/bitcraze/crazyflie/protos/Crazyflie.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/adept/pioneer3/protos/Pioneer3dx.proto"
 
 WorldInfo {
   basicTimeStep 20
@@ -27,8 +27,8 @@ WorldInfo {
   }
 }
 Viewpoint {
-  orientation -0.16864890364588697 0.06796148773394411 0.9833304548746719 2.362679169893373
-  position 44.68172510304538 -40.559513418242034 25.891694300704227
+  orientation 0.12972486576610692 -0.017466921527458226 -0.9913961699816674 3.558405487708188
+  position -36.450595681721566 66.50316279551268 8.011710411415983
 }
 TexturedBackgroundLight {
 }
@@ -86,6 +86,17 @@ RectangleArena {
   }
   wallThickness 0.5
   wallHeight 0.5
+}
+Pioneer3dx {
+  extensionSlot [
+    Compass {
+    }
+    GPS {
+    }
+  ]
+}
+Pioneer3dx {
+  name "Pioneer 3-DX(1)"
 }
 HighwayPole {
   translation -46.6667 88.7436 -0.14
@@ -248,15 +259,15 @@ Road {
   leftBorderBoundingObject TRUE
 }
 RubberDuck {
-  hidden linearVelocity_0 0.003361459044483847 -0.0034701548490382273 0.0007347593144009888
-  hidden angularVelocity_0 0.011510751355271244 0.011150199594119548 -1.2324236088684394e-11
-  translation -43.704597175200405 31.577247580501414 4.71491436723274
-  rotation 0.0007526043745960315 0.0017768370728722448 -0.9999981382166028 0.8013088043260654
+  hidden linearVelocity_0 0.0009258476282739502 -0.0009557857225876991 0.00047439923287385184
+  hidden angularVelocity_0 0.004991883293603184 0.004835522415898914 1.1232268362710335e-11
+  translation -43.704969603943894 31.577632058890263 4.714920906554506
+  rotation -0.00027162182794210495 -0.0006412767950659105 -0.999999757492798 0.8013076384841189
   scale 14
 }
 RubberDuck {
-  translation 6.761839173700133 -9.708543554539244 0.44271073731521793
-  rotation -0.00019387376830402227 -2.2973869578122066e-05 0.9999999809425815 -2.905693622469094
+  translation 6.7618693425249266 -9.708536557285429 0.44271073725519927
+  rotation -0.00019387379873076334 -2.297393606864541e-05 0.9999999809425739 -2.90569392849506
   name "rubber duck(1)"
   scale 30
 }
@@ -270,10 +281,17 @@ TrafficCone {
   name "traffic cone(1)"
 }
 RubberDuck {
-  hidden linearVelocity_0 0.02098173943210085 0.020315456509627714 -0.0010346150218253141
-  hidden angularVelocity_0 -0.06470168375905527 0.06679670795875164 1.4762365443873366e-05
-  translation -15.025171654771302 33.04800688748941 4.730568576096409
-  rotation -0.0003070808275802952 0.0007635672208920141 0.999999661333175 0.7693511186174965
+  hidden linearVelocity_0 -0.018254231460073298 -0.01773361581819612 -0.0001943166057188894
+  hidden angularVelocity_0 0.05625932853672884 -0.057911392023492506 -6.921168836265183e-08
+  translation -14.968446354634706 33.10280350181762 4.730573641738335
+  rotation 0.0006689381338888293 -0.0016430574279731138 0.9999984264407926 0.7708236916117965
   name "rubber duck(2)"
   scale 18
+}
+Crazyflie {
+  hidden linearVelocity_0 -0.17024343211274953 0.4618080081898268 1.9329161293900994e-06
+  hidden angularVelocity_0 -5.507278079244123e-09 -1.934795047165738e-09 -1.0047667571485242e-12
+  translation -51.870221061690756 70.38406816914743 3.6740117416185165
+  rotation 0.005610004161476958 -0.003910960443863232 -0.999976615847448 -1.924006241554256
+  controller "test_crazyflies"
 }
