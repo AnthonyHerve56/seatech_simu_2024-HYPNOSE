@@ -20,10 +20,10 @@ Author:   Kimberly McGuire (Bitcraze AB)
 """
 
 
-from controller import Robot
+from controller import Robot, Gyro
 from controller import Keyboard
 
-from math import cos, sin
+from math import cos, sin,atan2
 
 from pid_controller import pid_velocity_fixed_height_controller
 from wall_following import WallFollowing
@@ -156,9 +156,12 @@ class Maya(Robot):
     def down(self,value):
         self.height_diff_desired = -value
     def forward(self,value):
+        
         self.forward_desired = value
     def sideways(self,value):
-        self.yaw_desired = value
+        self.yaw_desired=value
+        #print("yaw_desired",self.yaw_desired)
+        
 
 if __name__ == '__main__':
 
@@ -168,49 +171,58 @@ if __name__ == '__main__':
     flag_y=False
     Coordinate=[(-50.8656,73.0636,4),(-56.8528,79.5066,4)]
     i=0
+    flag_yaw=True
+    
+    
     # Main loop:
     while robot.step(timestep) != -1:
-        print(robot.gps.getValues())
-        
+        #print("imu",robot.imu.getRollPitchYaw()[2])
+        print(Coordinate[i][1],robot.gps.getValues()[0],Coordinate[i][0],robot.gps.getValues()[1])
+        angle=atan2(Coordinate[i][1]-robot.gps.getValues()[0],Coordinate[i][0]-robot.gps.getValues()[1])-0.4
+        print(angle)
         robot.run()
-        if(robot.gps.getValues()[2]<Coordinate[i][2]):
+        if(robot.gps.getValues()[2]<Coordinate[i][2]+0.2):
             robot.up(0.1)
             flag=False
         else:
             robot.up(0)
             flag=True
-        if(robot.gps.getValues()[2]>Coordinate[i][2]+0.5):
+        if(robot.gps.getValues()[2]>Coordinate[i][2]+0.2):
             robot.down(0.1)
             flag=False
         else:
             robot.down(0)
             flag=True
         if((robot.gps.getValues()[2]<Coordinate[i][2]+0.5) and (robot.gps.getValues()[2]>Coordinate[i][2]-0.5)):
-            print("ici",Coordinate[i][2],robot.gps.getValues()[0]<Coordinate[i][2]+0.5,robot.gps.getValues()[2]>Coordinate[i][2]-0.5)
-            if(robot.gps.getValues()[0]<Coordinate[i][0]-0.2):
-                robot.forward(0.1)
-            elif(robot.gps.getValues()[0]>Coordinate[i][0]+0.2):
-                robot.forward(-0.1)
-            else:
-                robot.forward(0)
-                flag_X=True
-                
-            if(robot.gps.getValues()[1]<Coordinate[i][1]-0.2 ):
-                robot.sideways(0.2)
-            elif(robot.gps.getValues()[1]>Coordinate[i][1]+0.2 ):
-                robot.sideways(-0.2)
-                
-            else:
+           
+            angle=atan2(Coordinate[i][1]-robot.gps.getValues()[0],Coordinate[i][0]-robot.gps.getValues()[1])-0.4
+            #print("aaaaaaaaaaaaaaaa",angle<robot.imu.getRollPitchYaw()[2]+0.2,angle>robot.imu.getRollPitchYaw()[2]-0.2,angle,robot.imu.getRollPitchYaw()[2])
+            if(angle<robot.imu.getRollPitchYaw()[2]+0.05 and angle>robot.imu.getRollPitchYaw()[2]-0.05):
                 robot.sideways(0)
-                flag_Y=True
+                if(robot.gps.getValues()[0]<Coordinate[i][0]-0.2):
+                    robot.forward(-0.5)
+                elif(robot.gps.getValues()[0]>Coordinate[i][0]+0.2):
+                    robot.forward(0.5)
+                else:
+                    robot.forward(0)
+                    flag_X=True
+                    
+                
+
+            else:
+                robot.sideways(1)
+
         else:
             robot.forward(0)
-            robot.sideways(0)
-        if(flag_X and flag_Y):
+            
+        if(flag_X):
             flag_X=False
-            flag_Y=False
-            print(Coordinate[i])
+            
+            flag_yaw=True
+            #print(Coordinate[i])
+            
             i+=1
+            angle=-atan2(Coordinate[i][1]-robot.gps.getValues()[0],Coordinate[i][0]-robot.gps.getValues()[1])
                 
 
         

@@ -6,6 +6,6 @@ minimizedPerspectives: 000000ff00000000fd00000003000000000000000000000000fc01000
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 4 "../../../../usr/local/webots/projects/robots/clearpath/moose/controllers/moose_path_following/moose_path_following.c" "controllers/monde3_controller/monde3_controller.py" "../../../../usr/local/webots/projects/robots/dji/mavic/controllers/mavic2pro/mavic2pro.c" "../../../../usr/local/webots/projects/robots/bitcraze/crazyflie/controllers/crazyflie/crazyflie.c" "controllers/test_crazyflies/test_crazyflies.py"
+textFiles: 4 "../../../../usr/local/webots/projects/robots/clearpath/moose/controllers/moose_path_following/moose_path_following.c" "../../../../usr/local/webots/projects/robots/dji/mavic/controllers/mavic2pro/mavic2pro.c" "../../../../usr/local/webots/projects/robots/bitcraze/crazyflie/controllers/crazyflie/crazyflie.c" "controllers/test_crazyflies/test_crazyflies.py" "../../../../usr/local/webots/projects/robots/bitcraze/crazyflie/controllers/crazyflie_py_wallfollowing/crazyflie_py_wallfollowing.py" "controllers/crazyflies_verification/crazyflies_verification.py"
 consoles: Console:All:All
 renderingDevicePerspectives: Crazyflie:camera;1;1;0;0

@@ -67,7 +67,7 @@ class pid_velocity_fixed_height_controller():
         yaw_command = gains["kp_att_y"] * np.clip(yaw_rate_error, -1, 1)
         self.past_pitch_error = pitch_error
         self.past_roll_error = roll_error
-       
+        
         # Motor mixing
         m1 = alt_command - roll_command + pitch_command + yaw_command
         m2 = alt_command - roll_command - pitch_command - yaw_command
