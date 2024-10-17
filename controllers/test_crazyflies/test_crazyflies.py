@@ -58,6 +58,8 @@ class Maya(Robot):
         self.gps.enable(timestep)
         self.gyro = self.getDevice("gyro")
         self.gyro.enable(timestep)
+        self.compass = self.getDevice("compass")
+        self.compass.enable(timestep)
         self.camera = self.getDevice("camera")
         self.camera.enable(timestep)
         self.range_front = self.getDevice("range_front")
@@ -102,6 +104,7 @@ class Maya(Robot):
             self.first_time = False
 
         # Get sensor data
+            
         roll = self.imu.getRollPitchYaw()[0]
         pitch = self.imu.getRollPitchYaw()[1]
         yaw = self.imu.getRollPitchYaw()[2]
@@ -177,6 +180,7 @@ if __name__ == '__main__':
     # Main loop:
     while robot.step(timestep) != -1:
         #print("imu",robot.imu.getRollPitchYaw()[2])
+        print("compass",robot.compass)
         print(Coordinate[i][1],robot.gps.getValues()[0],Coordinate[i][0],robot.gps.getValues()[1])
         angle=atan2(Coordinate[i][1]-robot.gps.getValues()[0],Coordinate[i][0]-robot.gps.getValues()[1])-0.4
         print(angle)
@@ -194,7 +198,7 @@ if __name__ == '__main__':
             robot.down(0)
             flag=True
         if((robot.gps.getValues()[2]<Coordinate[i][2]+0.5) and (robot.gps.getValues()[2]>Coordinate[i][2]-0.5)):
-           
+            
             angle=atan2(Coordinate[i][1]-robot.gps.getValues()[0],Coordinate[i][0]-robot.gps.getValues()[1])-0.4
             #print("aaaaaaaaaaaaaaaa",angle<robot.imu.getRollPitchYaw()[2]+0.2,angle>robot.imu.getRollPitchYaw()[2]-0.2,angle,robot.imu.getRollPitchYaw()[2])
             if(angle<robot.imu.getRollPitchYaw()[2]+0.05 and angle>robot.imu.getRollPitchYaw()[2]-0.05):
